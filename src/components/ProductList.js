@@ -1,42 +1,52 @@
-// import React from 'react';
-// import Product from '../Product';
-// function ProductList({productList,incrementquantity,DecrementQuantity}){
-//   return(
-    
-//  productList.map((product,i)=>{
-//   return <Product product={product} key={i} incrementquantity={incrementquantity} index={i} DecrementQuantity={DecrementQuantity} />
-//  })
-//   );
+import React from "react";
 
-// }
-// export default ProductList;
-import React from 'react';
-
-function ProductList({ productList }) {
+function ProductList({ productList, removeitem }) {
   return (
     <>
       <table className="table">
         <thead>
           <tr>
-            <th scope="col"></th>
-            <th scope="col">PName</th>
-            <th scope="col">Price</th>
-            <th scope="col">Kg/Gm</th>
-            <th scope="col">Learn More</th>
+            <th>#</th>
+            <th>Product Name</th>
+            <th>Unit Price</th>
+            <th>Quantity</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
           {productList.map((product, i) => (
             <tr key={i}>
-              <th scope="row">{i + 1}</th>
+              <td>{i + 1}</td>
               <td>{product.name}</td>
-              <td>{product.price}</td>
-              <td>{product.quantity}</td>
-              <button>know more</button>
+              <td>₹{product.price}</td>
+              <td>{product.quantity}</td> {/* 👈 Only quantity shown here */}
+              <td>
+                <button
+                  className="btn btn-danger btn-sm"
+                  onClick={() => removeitem(i)}
+                >
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      <div className="row">
+        <div className="col-4 mt-5">
+          <div className="d-flex justify-content-between align-items-center">
+            <h1>Total Amount</h1>
+            <h1>
+              ₹
+              {productList.reduce(
+                (total, product) => total + product.quantity * product.price,
+                0
+              )}
+            </h1>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

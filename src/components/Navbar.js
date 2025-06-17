@@ -1,20 +1,33 @@
 import React from 'react';
-import { useNavigate } from "react-router-dom";
-function Navbar({initialTotal}){
+import { useNavigate, useLocation } from "react-router-dom";
+
+function Navbar({ initialTotal }) {
   const navigate = useNavigate();
-  return(
- <nav className="navbar navbar-expand-lg bg-dark text-white">
-  <div className="container-fluid">
-    <h1 class="me-5">Apni Shop</h1>
-    <div class="d-flex" role="search">
-        {/* <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/> */}
-        <button class="form-control btn-outline-success me-2 w-auto"onClick={() => navigate("/calculator")} ><span class="me-2">calculator</span>{initialTotal}</button>
-        <button class="form-control btn-outline-success me-2 w-auto">Admin</button>
+  const location = useLocation(); // to get current path
+
+  return (
+    <nav className="navbar navbar-expand-lg bg-dark text-white">
+      <div className="container-fluid">
+        <h1 className="me-5 text-white cursor-pointer"onClick={() => navigate("/")}>Apni Shop</h1>
+        <div className="d-flex" role="search">
+          {/* Show Calculator button only if not already on /calculator */}
+          {location.pathname !== "/calculator" && (
+            <button
+              className="form-control btn-outline-success me-2 w-auto"
+              onClick={() => navigate("/calculator")}
+            >
+              <span className="me-2">Calculator</span>
+            </button>
+          )}
+
+          {/* Always show Admin button */}
+          <button className="form-control btn-outline-success me-2 w-auto">
+            Admin
+          </button>
+        </div>
       </div>
-  </div>
-</nav>
+    </nav>
   );
-
-
 }
+
 export default Navbar;
