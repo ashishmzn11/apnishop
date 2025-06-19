@@ -19,9 +19,8 @@ function Navbar({ initialTotal }) {
               <span className="me-2">Calculator</span>
             </button>
           )}
-
           {/* Always show Admin button */}
-          <button className="form-control btn-outline-success me-2 w-auto">
+          <button className="form-control btn-outline-success me-2 w-auto" onClick={() => navigate("/Admin")}>
             Admin
           </button>
         </div>

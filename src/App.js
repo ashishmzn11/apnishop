@@ -3,6 +3,8 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import ProductList from "./components/ProductList";
 import Calculator from "./components/Calculator";
+import Additem from "./components/Additem";
+import Admin from "./components/Admin";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -15,12 +17,12 @@ function App() {
   const [productList, setProductList] = useState(initialProductList);
 
   const [calcProductList, setCalcProductList] = useState(
-    JSON.parse(JSON.stringify(initialProductList)) 
+    JSON.parse(JSON.stringify(initialProductList))
   );
   useEffect(() => {
     const newCalcList = productList.map((item) => ({
       ...item,
-      quantity: 1, 
+      quantity: 1,
     }));
     setCalcProductList(newCalcList);
   }, [productList]);
@@ -31,7 +33,6 @@ function App() {
     setCalcProductList(newList);
   };
 
- 
   const DecrementQuantity = (index) => {
     const newList = [...calcProductList];
     if (newList[index].quantity > 1) {
@@ -43,8 +44,12 @@ function App() {
   const removeitem = (index) => {
     const newProductList = [...productList];
     newProductList.splice(index, 1);
-    setProductList(newProductList); 
+    setProductList(newProductList);
   };
+  const additem=(newitem)=>{
+    setProductList([...productList, newitem]); 
+
+  }
 
   return (
     <Router>
@@ -67,10 +72,23 @@ function App() {
           path="/"
           element={
             <main className="container mt-5">
-              <ProductList
-                productList={productList}
-                removeitem={removeitem}
-              />
+              <ProductList productList={productList} removeitem={removeitem} />
+            </main>
+          }
+        />
+        <Route
+          path="/AddItem"
+          element={
+            <main className="container mt-5">
+              <Additem additem={additem} />
+            </main>
+          }
+        />
+        <Route
+          path="/Admin"
+          element={
+            <main className="container mt-5">
+              <Admin />
             </main>
           }
         />

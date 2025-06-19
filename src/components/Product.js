@@ -30,24 +30,25 @@ function Product({
 
       <div className="row">
         <table className="table">
-          <thead>
+          <thead className="col-12">
             <tr>
-              <th scope="col"></th>
-              <th scope="col">PName</th>
-              <th scope="col">Price</th>
-              <th scope="col">Kg/Gm</th>
+              <th scope="col" className="col-1"></th>
+              <th scope="col" className="col-2">PName</th>
+              <th scope="col" className="col-2">Price</th>
+              <th scope="col" className="col-2">Kg/Gm</th>
+              <th scope="col" className="col-2">ADD</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="col-12">
             {productList.map((product, i) => (
               <tr key={i}>
-                <th scope="row">{i + 1}</th>
-                <td>{product.name}</td>
-                <td>{product.quantity * product.price}</td>
-                <td>
+                <th className="col-1" scope="row">{i + 1}</th>
+                <td className="col-2">{product.name}</td>
+                <td className="col-2">{product.quantity * product.price}</td>
+                <td className="col-2">
                   <button
                     type="button"
-                    className="btn btn-outline-primary mx-2 "
+                    className="btn btn-danger mx-2 "
                     onClick={() => {
                       DecrementQuantity(i);
                     }}
@@ -57,13 +58,21 @@ function Product({
                   {product.quantity}
                   <button
                     type="button"
-                    className="btn btn-outline-primary mx-2"
+                    className="btn btn-success mx-2"
                     onClick={() => {
                       incrementquantity(i);
                     }}
                   >
                     +
                   </button>
+                  <td>
+                   <button
+                    type="button"
+                    className="btn btn-success mx-2  col-2"
+                  >
+                    Add
+                  </button>
+                  </td>
                 </td>
               </tr>
             ))}
